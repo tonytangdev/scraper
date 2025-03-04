@@ -10,7 +10,7 @@ export class Url {
     this.url = url;
   }
 
-  validateUrl(url: string): boolean {
+  private validateUrl(url: string): boolean {
     try {
       new URL(url);
       return true;
