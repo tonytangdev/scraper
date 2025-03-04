@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ArticleRepository } from '../../../../core/interfaces/article.repository';
-import { Article } from 'src/article/core/entities/article.entity';
+import { Article } from '../../../../../article/core/entities/article.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ArticleTypeORMEntity } from '../entities/article.typeORM.entity';
 import { Repository } from 'typeorm';
@@ -27,15 +27,20 @@ export class ArticleTypeORMRepository implements ArticleRepository {
     return articlesToReturn;
   }
 
-  async findAll(): Promise<Article[]> {
-    const articles = await this.articleRepository.find({
+  async findAll({
+    limit = 10,
+  }: {
+    limit: number;
+  }): Promise<{ data: Article[]; total: number }> {
+    const [articles, total] = await this.articleRepository.findAndCount({
       relations: ['job'],
+      take: limit,
     });
 
     const articlesToReturn = articles.map((article) =>
       ArticleTypeORMMapper.toDomainEntity(article),
     );
 
-    return articlesToReturn;
+    return { data: articlesToReturn, total };
   }
 }

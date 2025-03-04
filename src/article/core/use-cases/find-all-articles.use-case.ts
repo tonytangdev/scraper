@@ -6,6 +6,6 @@ export class FindAllArticlesUseCase {
   }
 
   async execute() {
-    return this.articleRepository.findAll();
+    return this.articleRepository.findAll({});
   }
 }

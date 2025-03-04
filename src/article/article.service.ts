@@ -12,7 +12,11 @@ export class ArticleService {
     await new SaveArticlesUseCase(this.articleRepository).execute(articles);
   }
 
-  findAll(): Promise<Article[]> {
-    return new FindAllArticlesUseCase(this.articleRepository).execute();
+  async findAll(): Promise<Article[]> {
+    const useCase = new FindAllArticlesUseCase(this.articleRepository);
+    const { data, total } = await useCase.execute();
+
+    console.log(`Total articles: ${total}`);
+    return data;
   }
 }
