@@ -16,7 +16,7 @@ export class CreateScrapingJobUseCase {
     try {
       job = await this.createNewJob(url);
       job = await this.markJobAsPending(job);
-      const articles = await this.scrapeForArticles(job.getUrl());
+      const articles = await this.scrapeForArticles(job);
       await this.saveArticles(articles);
       await this.markJobAsSuccess(job);
     } catch (error) {
@@ -30,8 +30,8 @@ export class CreateScrapingJobUseCase {
     return job;
   }
 
-  private async scrapeForArticles(url: string): Promise<Article[]> {
-    return this.scrapper.fetchArticles(url);
+  private async scrapeForArticles(job: Job): Promise<Article[]> {
+    return this.scrapper.fetchArticles(job);
   }
 
   private async markJobAsPending(job: Job): Promise<Job> {

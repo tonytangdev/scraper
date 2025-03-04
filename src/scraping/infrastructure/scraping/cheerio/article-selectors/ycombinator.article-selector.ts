@@ -1,9 +1,10 @@
+import { Job } from '../../../../../scraping/core/entities/job.entity';
 import { Article } from '../../../../../article/core/entities/article.entity';
 import { ArticleSelector } from '../interfaces/article-selector.interface';
 import * as cheerio from 'cheerio';
 
 export class YCombinatorArticleSelector implements ArticleSelector {
-  selectArticles(html: string): Article[] {
+  selectArticles(html: string, jobId: Job['id']): Article[] {
     const $ = cheerio.load(html);
 
     const articles: Article[] = [];
@@ -11,15 +12,14 @@ export class YCombinatorArticleSelector implements ArticleSelector {
       try {
         const title = $(element).find('a').eq(1).text();
         const url = $(element).find('a').eq(1).attr('href');
-        const publicationDate = $(element).next().find('.age').attr('title');
+        const publishedAt = $(element).next().find('.age').attr('title');
 
         const article = new Article({
           title,
           url: url ? url : '',
           source: 'YCombinator',
-          publicationDate: publicationDate
-            ? new Date(publicationDate)
-            : new Date(),
+          publishedAt: publishedAt ? new Date(publishedAt) : new Date(),
+          jobId,
         });
 
         articles.push(article);

@@ -1,3 +1,4 @@
+import { Job } from 'src/scraping/core/entities/job.entity';
 import { BBCArticleSelector } from '../article-selectors/bbc.article-selector';
 import { YCombinatorArticleSelector } from '../article-selectors/ycombinator.article-selector';
 import { ArticleSelector } from '../interfaces/article-selector.interface';
@@ -17,7 +18,7 @@ export class SelectArticlesStrategy {
     }
   }
 
-  selectArticles(html: string) {
-    return this.articleSelector.selectArticles(html);
+  selectArticles(html: string, jobId: Job['id']) {
+    return this.articleSelector.selectArticles(html, jobId);
   }
 }
