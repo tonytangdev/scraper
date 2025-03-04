@@ -12,7 +12,11 @@ export class YCombinatorArticleSelector implements ArticleSelector {
       try {
         const title = $(element).find('a').eq(1).text();
         const url = $(element).find('a').eq(1).attr('href');
-        const publishedAt = $(element).next().find('.age').attr('title');
+        const publishedAt = $(element)
+          .next()
+          .find('.age')
+          .attr('title')
+          ?.split(' ')[0];
 
         const article = new Article({
           title,

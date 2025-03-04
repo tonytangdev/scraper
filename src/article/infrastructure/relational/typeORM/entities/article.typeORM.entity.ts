@@ -3,6 +3,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
   PrimaryColumn,
   UpdateDateColumn,
@@ -14,6 +15,7 @@ export class ArticleTypeORMEntity {
   id: string;
 
   @ManyToOne(() => JobTypeORMEntity, (job) => job.articles)
+  @JoinColumn({ name: 'job_id' })
   job: JobTypeORMEntity;
 
   @Column({ type: 'timestamp', name: 'published_at' })

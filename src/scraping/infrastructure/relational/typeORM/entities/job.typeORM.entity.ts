@@ -33,6 +33,6 @@ export class JobTypeORMEntity {
   @Column({ type: 'timestamp', name: 'deleted_at', nullable: true })
   deletedAt: Date | null;
 
-  @OneToMany(() => ArticleTypeORMEntity, (article) => article.id)
+  @OneToMany(() => ArticleTypeORMEntity, (article) => article.job)
   articles: ArticleTypeORMEntity[];
 }

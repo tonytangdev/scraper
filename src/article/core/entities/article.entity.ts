@@ -1,5 +1,6 @@
 import { randomUUID } from 'node:crypto';
 import { Url } from '../../../shared/value-objects/url';
+import { Job } from '../../../scraping/core/entities/job.entity';
 
 type ArticleProps = {
   id?: string;
@@ -9,7 +10,8 @@ type ArticleProps = {
   createdAt?: Date;
   updatedAt?: Date;
   deletedAt?: Date | null;
-  publicationDate: Date;
+  publishedAt: Date;
+  jobId: Job['id'];
 };
 
 export class Article {
@@ -20,7 +22,8 @@ export class Article {
   private createdAt: Date;
   private updatedAt: Date;
   private deletedAt: Date | null;
-  private publicationDate: Date;
+  private publishedAt: Date;
+  private jobId: Job['id'];
 
   constructor({
     id = randomUUID(),
@@ -30,7 +33,8 @@ export class Article {
     createdAt = new Date(),
     updatedAt = new Date(),
     deletedAt = null,
-    publicationDate,
+    publishedAt,
+    jobId,
   }: ArticleProps) {
     this.id = id;
     this.title = title;
@@ -39,6 +43,47 @@ export class Article {
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
     this.deletedAt = deletedAt;
-    this.publicationDate = publicationDate;
+    this.publishedAt = publishedAt;
+    this.jobId = jobId;
+  }
+
+  getId(): string {
+    return this.id;
+  }
+
+  getTitle(): string {
+    return this.title;
+  }
+
+  getUrl(): string {
+    return this.url.getUrl();
+  }
+
+  getSource(): string {
+    return this.source;
+  }
+
+  getCreatedAt(): Date {
+    return this.createdAt;
+  }
+
+  getUpdatedAt(): Date {
+    return this.updatedAt;
+  }
+
+  getDeletedAt(): Date | null {
+    return this.deletedAt;
+  }
+
+  getPublishedAt(): Date {
+    return this.publishedAt;
+  }
+
+  getJobId(): Job['id'] {
+    return this.jobId;
+  }
+
+  setJobId(jobId: Job['id']): void {
+    this.jobId = jobId;
   }
 }
