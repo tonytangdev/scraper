@@ -26,4 +26,16 @@ export class ArticleTypeORMRepository implements ArticleRepository {
 
     return articlesToReturn;
   }
+
+  async findAll(): Promise<Article[]> {
+    const articles = await this.articleRepository.find({
+      relations: ['job'],
+    });
+
+    const articlesToReturn = articles.map((article) =>
+      ArticleTypeORMMapper.toDomainEntity(article),
+    );
+
+    return articlesToReturn;
+  }
 }
