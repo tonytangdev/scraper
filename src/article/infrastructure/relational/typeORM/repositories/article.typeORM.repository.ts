@@ -48,8 +48,7 @@ export class ArticleTypeORMRepository implements ArticleRepository {
     };
     if (sort) {
       sort.forEach((sortField) => {
-        const field = sortField.substring(1);
-        const direction = sortField.startsWith('-') ? 'DESC' : 'ASC';
+        const [field, direction] = sortField.split(':');
         order[field] = direction;
       });
     }

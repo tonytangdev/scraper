@@ -3,6 +3,7 @@ import { Article } from './core/entities/article.entity';
 import { ArticleRepository } from './core/interfaces/article.repository';
 import { SaveArticlesUseCase } from './core/use-cases/save-articles.use-case';
 import { FindAllArticlesUseCase } from './core/use-cases/find-all-articles.use-case';
+import { FindAllArticlesDTO } from './dtos/find-all-articles.dto';
 
 @Injectable()
 export class ArticleService {
@@ -12,11 +13,10 @@ export class ArticleService {
     await new SaveArticlesUseCase(this.articleRepository).execute(articles);
   }
 
-  async findAll(): Promise<Article[]> {
+  async findAll(dto: FindAllArticlesDTO): Promise<Article[]> {
     const useCase = new FindAllArticlesUseCase(this.articleRepository);
-    const { data, total } = await useCase.execute();
+    const { data } = await useCase.execute(dto);
 
-    console.log(`Total articles: ${total}`);
     return data;
   }
 }
