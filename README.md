@@ -35,6 +35,20 @@ docker-compose up -d
 npm start
 ```
 
+### Run scraper
+
+POST request to `http://localhost:3000/scrape` with the following body:
+
+```json
+{
+  "url": "https://news.ycombinator.com/"
+}
+```
+
+### Fetch articles
+
+GET request to `http://localhost:3000/articles?limit=2&source=YCombinator&sort=publishedAt:ASC,createdAt:DESC` to fetch all articles with filters.
+
 ## Schema
 
 ![schema](schema-scraper.png)
