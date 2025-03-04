@@ -12,11 +12,17 @@ export class CreateScrapingJobUseCase {
   ) {}
 
   async execute(url: string): Promise<void> {
-    let job = await this.createNewJob(url);
-    job = await this.markJobAsPending(job);
-    const articles = await this.scrapeForArticles(job.getUrl());
-    await this.saveArticles(articles);
-    await this.markJobAsSuccess(job);
+    let job: Job | null = null;
+    try {
+      job = await this.createNewJob(url);
+      job = await this.markJobAsPending(job);
+      const articles = await this.scrapeForArticles(job.getUrl());
+      await this.saveArticles(articles);
+      await this.markJobAsSuccess(job);
+    } catch (error) {
+      if (job) await this.markJobAsFailed(job);
+      throw error;
+    }
   }
 
   private async createNewJob(url: string): Promise<Job> {
@@ -40,5 +46,10 @@ export class CreateScrapingJobUseCase {
 
   private async saveArticles(articles: Article[]): Promise<void> {
     await this.articleService.saveArticles(articles);
+  }
+
+  private async markJobAsFailed(job: Job): Promise<Job> {
+    job.markAsFail();
+    return this.jobRepository.save(job);
   }
 }
