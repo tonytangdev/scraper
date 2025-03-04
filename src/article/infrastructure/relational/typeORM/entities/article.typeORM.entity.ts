@@ -15,8 +15,11 @@ export class ArticleTypeORMEntity {
   id: string;
 
   @ManyToOne(() => JobTypeORMEntity, (job) => job.articles)
-  @JoinColumn({ name: 'job_id' })
+  @JoinColumn({ name: 'job_id', referencedColumnName: 'id' })
   job: JobTypeORMEntity;
+
+  @Column({ name: 'job_id' })
+  jobId: string;
 
   @Column({ type: 'timestamp', name: 'published_at' })
   publishedAt: Date;

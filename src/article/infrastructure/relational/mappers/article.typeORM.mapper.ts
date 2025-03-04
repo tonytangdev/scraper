@@ -1,20 +1,18 @@
-import { JobTypeORMEntity } from '../../../../scraping/infrastructure/relational/typeORM/entities/job.typeORM.entity';
 import { Article } from '../../../../article/core/entities/article.entity';
 import { ArticleTypeORMEntity } from '../typeORM/entities/article.typeORM.entity';
 
 export class ArticleTypeORMMapper {
   static toTypeORMEntity(article: Article) {
-    const entity: ArticleTypeORMEntity = {
-      id: article.getId(),
-      job: { id: article.getJobId() } as JobTypeORMEntity,
-      url: article.getUrl(),
-      title: article.getTitle(),
-      createdAt: article.getCreatedAt(),
-      updatedAt: article.getUpdatedAt(),
-      deletedAt: article.getDeletedAt(),
-      publishedAt: article.getPublishedAt(),
-      source: article.getSource(),
-    };
+    const entity = new ArticleTypeORMEntity();
+    entity.id = article.getId();
+    entity.jobId = article.getJobId();
+    entity.url = article.getUrl();
+    entity.title = article.getTitle();
+    entity.createdAt = article.getCreatedAt();
+    entity.updatedAt = article.getUpdatedAt();
+    entity.deletedAt = article.getDeletedAt();
+    entity.publishedAt = article.getPublishedAt();
+    entity.source = article.getSource();
 
     return entity;
   }
