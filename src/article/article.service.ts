@@ -10,4 +10,8 @@ export class ArticleService {
   async saveArticles(articles: Article[]): Promise<void> {
     await new SaveArticlesUseCase(this.articleRepository).execute(articles);
   }
+
+  findAll(): Promise<Article[]> {
+    throw new Error('Method not implemented.');
+  }
 }
