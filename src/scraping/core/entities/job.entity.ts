@@ -1,5 +1,5 @@
 import { randomUUID } from 'node:crypto';
-import { Url } from '../value-objects/url';
+import { Url } from '../../../shared/value-objects/url';
 
 export enum JobStatus {
   IDLE = 'IDLE',
