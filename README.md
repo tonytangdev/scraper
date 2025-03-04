@@ -34,3 +34,7 @@ docker-compose up -d
 ```bash
 npm start
 ```
+
+## Schema
+
+![schema](schema-scraper.png)
