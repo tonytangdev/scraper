@@ -7,6 +7,7 @@ import { ArticleService } from './core/interfaces/article.service.interface';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { JobTypeORMEntity } from './infrastructure/relational/typeORM/entities/job.typeORM.entity';
 import { JobTypeORMRepository } from './infrastructure/relational/typeORM/repositories/job.typeORM.repository';
+import { ScrapperCheerio } from './infrastructure/scraping/cheerio/scraper.cheerio';
 
 @Module({
   controllers: [ScrapingController],
@@ -14,11 +15,7 @@ import { JobTypeORMRepository } from './infrastructure/relational/typeORM/reposi
     ScrapingService,
     {
       provide: Scrapper,
-      useValue: {
-        fetchArticles: () => {
-          throw new Error('Need to implement Scrapper interface');
-        },
-      },
+      useClass: ScrapperCheerio,
     },
     {
       provide: JobRepository,
