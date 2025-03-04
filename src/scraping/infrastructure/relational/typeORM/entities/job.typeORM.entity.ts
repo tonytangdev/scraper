@@ -1,8 +1,10 @@
+import { ArticleTypeORMEntity } from 'src/article/infrastructure/relational/typeORM/entities/article.typeORM.entity';
 import { JobStatus } from '../../../../core/entities/job.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -30,4 +32,7 @@ export class JobTypeORMEntity {
 
   @Column({ type: 'timestamp', name: 'deleted_at', nullable: true })
   deletedAt: Date | null;
+
+  @OneToMany(() => ArticleTypeORMEntity, (article) => article.id)
+  articles: ArticleTypeORMEntity[];
 }

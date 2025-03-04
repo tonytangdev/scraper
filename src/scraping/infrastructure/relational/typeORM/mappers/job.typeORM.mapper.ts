@@ -10,6 +10,7 @@ export class JobTypeORMMapper {
       createdAt: job.getCreatedAt(),
       updatedAt: job.getUpdatedAt(),
       deletedAt: job.getDeletedAt(),
+      articles: [],
     };
   }
 
