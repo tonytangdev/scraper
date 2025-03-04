@@ -4,6 +4,9 @@ import { ScrapingService } from './scraping.service';
 import { Scrapper } from './core/interfaces/scrapper.interface';
 import { JobRepository } from './core/interfaces/job.repository.interface';
 import { ArticleService } from './core/interfaces/article.service.interface';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { JobTypeORMEntity } from './infrastructure/relational/typeORM/entities/job.typeORM.entity';
+import { JobTypeORMRepository } from './infrastructure/relational/typeORM/repositories/job.typeORM.repository';
 
 @Module({
   controllers: [ScrapingController],
@@ -19,11 +22,7 @@ import { ArticleService } from './core/interfaces/article.service.interface';
     },
     {
       provide: JobRepository,
-      useValue: {
-        save: () => {
-          throw new Error('Need to implement JobRepository interface');
-        },
-      },
+      useClass: JobTypeORMRepository,
     },
     {
       provide: ArticleService,
@@ -34,5 +33,6 @@ import { ArticleService } from './core/interfaces/article.service.interface';
       },
     },
   ],
+  imports: [TypeOrmModule.forFeature([JobTypeORMEntity])],
 })
 export class ScrapingModule {}

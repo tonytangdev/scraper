@@ -60,4 +60,20 @@ export class Job {
   markAsFail(): void {
     this.status = JobStatus.FAIL;
   }
+
+  getId(): string {
+    return this.id;
+  }
+
+  getCreatedAt(): Date {
+    return this.createdAt;
+  }
+
+  getUpdatedAt(): Date {
+    return this.updatedAt;
+  }
+
+  getDeletedAt(): Date | null {
+    return this.deletedAt;
+  }
 }
