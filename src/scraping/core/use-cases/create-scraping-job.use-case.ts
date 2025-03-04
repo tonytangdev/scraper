@@ -1,8 +1,8 @@
 import { Article } from 'src/article/core/entities/article.entity';
 import { Job } from '../entities/job.entity';
-import { ArticleService } from '../interfaces/article.service.interface';
 import { JobRepository } from '../interfaces/job.repository.interface';
 import { Scrapper } from '../interfaces/scrapper.interface';
+import { ArticleService } from '../../../article/article.service';
 
 export class CreateScrapingJobUseCase {
   constructor(

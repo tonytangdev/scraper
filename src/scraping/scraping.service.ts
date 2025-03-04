@@ -1,9 +1,9 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { CreateScrapingJobUseCase } from './core/use-cases/create-scraping-job.use-case';
 import { CreateScrapingJobDTO } from './dtos/create-scraping-job.dto';
-import { ArticleService } from './core/interfaces/article.service.interface';
 import { JobRepository } from './core/interfaces/job.repository.interface';
 import { Scrapper } from './core/interfaces/scrapper.interface';
+import { ArticleService } from '../article/article.service';
 
 @Injectable()
 export class ScrapingService {
