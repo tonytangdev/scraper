@@ -1,3 +1,5 @@
+import { Article } from '../../../article/core/entities/article.entity';
+
 export abstract class ArticleService {
-  abstract saveArticles(): Promise<void>;
+  abstract saveArticles(articles: Article[]): Promise<void>;
 }
