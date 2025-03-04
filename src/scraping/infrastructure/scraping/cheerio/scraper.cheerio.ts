@@ -9,6 +9,6 @@ export class ScrapperCheerio implements Scrapper {
     const html = await fetch(url).then((res) => res.text());
     const articles = new SelectArticlesStrategy(url).selectArticles(html);
 
-    throw new Error('Method not implemented.');
+    return articles;
   }
 }

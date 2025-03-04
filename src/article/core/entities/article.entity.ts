@@ -6,9 +6,9 @@ type ArticleProps = {
   title: string;
   url: string;
   source: string;
-  createdAt: Date;
-  updatedAt: Date;
-  deletedAt: Date | null;
+  createdAt?: Date;
+  updatedAt?: Date;
+  deletedAt?: Date | null;
   publicationDate: Date;
 };
 
