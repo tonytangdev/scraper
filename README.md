@@ -37,7 +37,7 @@ npm start
 
 ### Run scraper
 
-POST request to `http://localhost:3000/scrape` with the following body:
+POST request to `http://localhost:3000/scrapings` with the following body:
 
 ```json
 {
